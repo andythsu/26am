@@ -1,35 +1,44 @@
-import { Component, OnInit, SimpleChanges, OnChanges, Input} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  SimpleChanges,
+  OnChanges,
+  Input
+} from "@angular/core";
 
-import {DaycounterService} from './DayCounter.service';
+import { DaycounterService } from "./DayCounter.service";
 
 @Component({
-  selector: 'day-counter',
+  selector: "day-counter",
   providers: [DaycounterService],
-  templateUrl: './daycounter.component.html',
-  styleUrls: ['./daycounter.component.scss']
+  templateUrl: "./daycounter.component.html",
+  styleUrls: ["./daycounter.component.scss"]
 })
-export class DayCounterComponent implements OnInit, OnChanges{
-
-  @Input('startTime') 
+export class DayCounterComponent implements OnInit, OnChanges {
+  @Input("startTime")
   public startTime: string;
-  @Input('showDays')
+  @Input("showDays")
   public showDays: boolean = false;
-  @Input('showHours')
+  @Input("showHours")
   public showHours: boolean = false;
-  @Input('showMinutes')
+  @Input("showMinutes")
   public showMinutes: boolean = false;
-  @Input('showSeconds')
+  @Input("showSeconds")
   public showSeconds: boolean = false;
 
-  constructor(public dayCounter: DaycounterService) {
-  }
+  @Input("showDayPassed")
+  public showDayPassed: boolean = false;
 
-  ngOnInit(){
+  constructor(public dayCounter: DaycounterService) {}
+
+  ngOnInit() {
     this.dayCounter.initCounter(this.startTime);
   }
 
   //detect any changes
-  ngOnChanges(changes: SimpleChanges){
-  }
+  ngOnChanges(changes: SimpleChanges) {}
 
+  hasDayPassed() {
+    return this.dayCounter.isTimeBigger(new Date(), this.startTime);
+  }
 }
