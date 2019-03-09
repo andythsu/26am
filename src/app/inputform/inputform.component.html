@@ -1,0 +1,23 @@
+<mat-form-field>
+  <input
+  #inputBox 
+  matInput 
+  placeholder="" 
+  (keyup.enter)="onEnter()"
+  autocomplete="off">  
+</mat-form-field>
+
+<!-- <mat-form-field>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <input matInput [matDatepicker]="picker" placeholder="" autocomplete="off">
+</mat-form-field> -->
+
+<date-picker #datepicker
+(keyup.enter)="onEnter()"
+></date-picker>
+
+
+<time-picker #timepicker
+(keyup.enter)="onEnter()"
+></time-picker>

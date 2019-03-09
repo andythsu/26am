@@ -1,0 +1,12 @@
+<mat-list>
+  <h3 mat-subheader>Bucket List</h3>
+  <div *ngFor="let item of bucketlist">
+    <mat-list-item *ngIf="!item.done">
+      <h4 mat-line >{{item.name}}</h4>
+      <p mat-line >{{item.date}} </p>
+      <day-counter  startTime="{{item.datetime}}" class="bucketListDayCounter"
+      showDays=true
+      showHours=true></day-counter>
+    </mat-list-item>
+  </div>
+</mat-list>
