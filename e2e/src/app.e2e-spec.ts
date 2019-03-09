@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to ts-am-sc!');
+    expect(page.getTitleText()).toEqual('Welcome to 26am!');
   });
 });
