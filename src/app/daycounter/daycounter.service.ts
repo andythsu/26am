@@ -1,39 +1,41 @@
 import { Injectable } from "@angular/core";
-import { DaycounterModule } from "./daycounter.module";
 
-@Injectable()
+// @Injectable()
 export class DaycounterService {
   private startTime: string;
-  private days;
-  private hours;
-  private minutes;
-  private seconds;
+  private days: string = "0";
+  private hours: string = "0";
+  private minutes: string = "0";
+  private seconds: string = "0";
+  private isLoading: boolean = true;
 
   getTimeElapsed(): void {
     var t = Date.parse(new Date().toString()) - Date.parse(this.startTime);
-    this.days = Math.floor(t / (1000 * 60 * 60 * 24));
+    this.days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
     this.seconds = ("0" + Math.floor((t / 1000) % 60)).slice(-2);
+    this.isLoading = false;
   }
 
   getTimeLeft(): void {
     var t = Date.parse(this.startTime) - Date.parse(new Date().toString());
-    this.days = Math.floor(t / (1000 * 60 * 60 * 24));
+    this.days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
     this.seconds = ("0" + Math.floor((t / 1000) % 60)).slice(-2);
+    this.isLoading = false;
   }
 
   initCounter(startTime) {
     this.startTime = startTime;
-    var self = this;
-    if (this.isTimeBigger(new Date(), startTime)) {
-      var timeInterval = setInterval(function() {
+    let self = this;
+    if (this.isTimeBigger(new Date(), this.startTime)) {
+      setInterval(() => {
         self.getTimeElapsed();
       }, 1000);
     } else {
-      var timeInterval = setInterval(function() {
+      setInterval(() => {
         self.getTimeLeft();
       }, 1000);
     }
@@ -58,5 +60,9 @@ export class DaycounterService {
 
   getSeconds() {
     return this.seconds;
+  }
+
+  getIsLoading() {
+    return this.isLoading;
   }
 }

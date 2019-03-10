@@ -1,4 +1,4 @@
-<span>
+<span *ngIf="!dayCounter.getIsLoading()">
   {{ showDays ? dayCounter.getDays() + " Days" : "" }}
   {{ showHours ? dayCounter.getHours() + " Hours" : "" }}
   {{ showMinutes ? dayCounter.getMinutes() + " Minutes" : "" }}
