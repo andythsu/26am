@@ -1,7 +1,8 @@
 export class DateUtil {
   _date: Date;
   constructor(dateString) {
-    this._date = new Date(dateString);
+    const dateTimeInGMT = new Date(dateString);
+    this._date = new Date(dateTimeInGMT.toUTCString() + "-04:00");
   }
 
   getFullDate(): any {

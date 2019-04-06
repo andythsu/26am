@@ -49,7 +49,6 @@ export class ListService {
           const fullDate = new DateUtil(data.dateTime).getFullDate();
           data.fullDate = fullDate;
           this.upcomingEvents.push(data);
-          console.log(this.upcomingEvents);
           resolve();
         });
     });

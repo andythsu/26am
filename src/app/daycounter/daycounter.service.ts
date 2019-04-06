@@ -1,5 +1,3 @@
-import { Injectable } from "@angular/core";
-
 // @Injectable()
 export class DaycounterService {
   private startTime: string;
@@ -7,7 +5,6 @@ export class DaycounterService {
   private hours: string = "0";
   private minutes: string = "0";
   private seconds: string = "0";
-  private isLoading: boolean = true;
 
   getTimeElapsed(): void {
     var t = Date.parse(new Date().toString()) - Date.parse(this.startTime);
@@ -15,7 +12,6 @@ export class DaycounterService {
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
     this.seconds = ("0" + Math.floor((t / 1000) % 60)).slice(-2);
-    this.isLoading = false;
   }
 
   getTimeLeft(): void {
@@ -24,17 +20,18 @@ export class DaycounterService {
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
     this.seconds = ("0" + Math.floor((t / 1000) % 60)).slice(-2);
-    this.isLoading = false;
   }
 
   initCounter(startTime) {
     this.startTime = startTime;
     let self = this;
     if (this.isTimeBigger(new Date(), this.startTime)) {
+      self.getTimeElapsed();
       setInterval(() => {
         self.getTimeElapsed();
       }, 1000);
     } else {
+      self.getTimeLeft();
       setInterval(() => {
         self.getTimeLeft();
       }, 1000);
@@ -60,9 +57,5 @@ export class DaycounterService {
 
   getSeconds() {
     return this.seconds;
-  }
-
-  getIsLoading() {
-    return this.isLoading;
   }
 }
