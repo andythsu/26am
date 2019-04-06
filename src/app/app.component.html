@@ -2,6 +2,12 @@
 <!-- <div>
   <button (click)="popup.showAsElement('element')">Show popup element</button>
 </div> -->
+<div>
+  <app-alert
+    *ngIf="alertService.raiseAlert"
+    [data]="alertService.alertData"
+  ></app-alert>
+</div>
 <div class="center">
   <div class="counterSection">
     <fa-icon class="heartIcon" [icon]="faHeart"></fa-icon>
@@ -15,7 +21,10 @@
     <fa-icon class="heartIcon" [icon]="faHeart"></fa-icon>
   </div>
   <div class="formSection">
-    <inputform class="inputform"></inputform>
+    <inputform
+      class="inputform"
+      (alertEmitter)="raiseAlert($event)"
+    ></inputform>
   </div>
   <div class="listSection">
     <list></list>

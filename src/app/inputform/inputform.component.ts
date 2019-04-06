@@ -13,7 +13,6 @@ import { ListService } from "../list/list.service.js";
 
 @Component({
   selector: "inputform",
-  providers: [ListService],
   templateUrl: "./inputform.component.html",
   styleUrls: ["./inputform.component.scss"],
   encapsulation: ViewEncapsulation.None
@@ -23,6 +22,8 @@ export class InputformComponent implements OnInit {
   @ViewChild("timepicker") timePicker;
   @ViewChild("datepicker") datePicker;
 
+  @Output() alertEmitter = new EventEmitter<any>();
+
   constructor(private listService: ListService) {}
 
   ngOnInit() {}
@@ -31,10 +32,23 @@ export class InputformComponent implements OnInit {
     const name = this.inputBox.nativeElement.value;
     const date = this.datePicker.nativeElement.value;
     const time = this.timePicker.nativeElement.value;
-    this.setInputBoxValue("");
-    this.setDatePickerValue("");
-    this.setTimePickerValue("");
-    this.listService.addToList(name, date, time);
+    if (!name || !date) {
+      this.alertEmitter.emit({
+        message: "name or date cannot be undefined",
+        type: "danger"
+      });
+    }
+
+    this.listService
+      .addToList(name, date, time)
+      .then(() => {
+        this.setInputBoxValue("");
+        this.setDatePickerValue("");
+        this.setTimePickerValue("");
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   setInputBoxValue(val) {

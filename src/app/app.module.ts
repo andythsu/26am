@@ -12,6 +12,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { DaycounterModule } from "./daycounter/daycounter.module";
 import { InputformModule } from "./inputform/inputform.module";
 import { ListModule } from "./list/list.module";
+import { AlertModule } from "./alert/alert.module";
 
 @NgModule({
   declarations: [AppComponent, PopupComponent],
@@ -19,6 +20,7 @@ import { ListModule } from "./list/list.module";
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    AlertModule,
     FontAwesomeModule,
     DaycounterModule,
     InputformModule,

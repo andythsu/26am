@@ -1,6 +1,6 @@
 <mat-list>
   <h3 mat-subheader>Bucket List</h3>
-  <div *ngFor="let upcomingEvent of upcomingEvents">
+  <div *ngFor="let upcomingEvent of listService.upcomingEvents">
     <mat-list-item>
       <h4 mat-line>{{ upcomingEvent.name }}</h4>
       <p mat-line>{{ upcomingEvent.fullDate }}</p>
@@ -14,7 +14,7 @@
       </day-counter>
     </mat-list-item>
   </div>
-  <div *ngFor="let oldEvent of oldEvents">
+  <!-- <div *ngFor="let oldEvent of oldEvents">
     <mat-list-item>
       <h4 mat-line>{{ oldEvent.name }}</h4>
       <p mat-line>{{ oldEvent.fullDate }}</p>
@@ -27,5 +27,5 @@
       >
       </day-counter>
     </mat-list-item>
-  </div>
+  </div> -->
 </mat-list>

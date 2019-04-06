@@ -4,6 +4,7 @@ import { PopupService } from "./popup/popup.service";
 // import { PopupComponent } from './popup/popup.component';
 
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { AlertService } from "./alert/alert.service";
 
 @Component({
   selector: "app-root",
@@ -13,10 +14,19 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 export class AppComponent {
   faHeart = faHeart;
 
-  constructor(injector: Injector, public popup: PopupService) {
+  constructor(
+    injector: Injector,
+    public popup: PopupService,
+    public alertService: AlertService
+  ) {
     // Convert `PopupComponent` to a custom element.
     // const PopupElement = createCustomElement(PopupComponent, {injector});
     // Register the custom element with the browser.
     // customElements.define('popup-element', PopupElement);
+  }
+  raiseAlert($event) {
+    const message = $event.message;
+    const type = $event.type;
+    this.alertService.displayAlert(message, type);
   }
 }
