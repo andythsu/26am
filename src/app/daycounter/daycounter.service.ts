@@ -7,7 +7,7 @@ export class DaycounterService {
   private seconds: string = "0";
 
   getTimeElapsed(): void {
-    var t = Date.parse(new Date().toString()) - Date.parse(this.startTime);
+    const t = Date.parse(new Date().toString()) - Date.parse(this.startTime);
     this.days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
@@ -15,7 +15,7 @@ export class DaycounterService {
   }
 
   getTimeLeft(): void {
-    var t = Date.parse(this.startTime) - Date.parse(new Date().toString());
+    const t = Date.parse(this.startTime) - Date.parse(new Date().toString());
     this.days = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
     this.hours = ("0" + Math.floor((t / (1000 * 60 * 60)) % 24)).slice(-2);
     this.minutes = ("0" + Math.floor((t / 1000 / 60) % 60)).slice(-2);
