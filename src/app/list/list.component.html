@@ -31,7 +31,11 @@
         showDayPassed="true"
       >
       </day-counter>
-      <fa-icon [icon]="faTrash" (click)="onRemoveOldEvent(oldEvent)"></fa-icon>
+      <fa-icon
+        class="faTrash"
+        [icon]="faTrash"
+        (click)="onRemoveOldEvent(oldEvent)"
+      ></fa-icon>
     </mat-list-item>
   </div>
 </mat-list>
