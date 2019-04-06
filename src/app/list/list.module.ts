@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ListComponent } from './list.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ListComponent } from "./list.component";
 
-import { MatListModule, MatIconModule } from '@angular/material';
+import { MatListModule, MatIconModule } from "@angular/material";
 
-import { DaycounterModule } from '../daycounter/daycounter.module';
-import { HttpClientModule } from '@angular/common/http';
+import { DaycounterModule } from "../daycounter/daycounter.module";
+import { HttpClientModule } from "@angular/common/http";
+
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   imports: [
@@ -13,9 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatListModule,
     MatIconModule,
-    DaycounterModule
+    DaycounterModule,
+    FontAwesomeModule
   ],
   declarations: [ListComponent],
   exports: [ListComponent]
 })
-export class ListModule { }
+export class ListModule {}

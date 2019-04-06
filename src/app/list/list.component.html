@@ -12,6 +12,10 @@
         showDayPassed="true"
       >
       </day-counter>
+      <fa-icon
+        [icon]="faTrash"
+        (click)="onRemoveUpcomingEvent(upcomingEvent)"
+      ></fa-icon>
     </mat-list-item>
   </div>
   <div *ngFor="let oldEvent of listService.oldEvents">
@@ -26,6 +30,7 @@
         showDayPassed="true"
       >
       </day-counter>
+      <fa-icon [icon]="faTrash" (click)="onRemoveOldEvent(oldEvent)"></fa-icon>
     </mat-list-item>
   </div>
 </mat-list>

@@ -3,7 +3,8 @@ import {
   OnInit,
   SimpleChanges,
   OnChanges,
-  Input
+  Input,
+  ViewEncapsulation
 } from "@angular/core";
 
 import { DaycounterService } from "./DayCounter.service";
@@ -12,7 +13,8 @@ import { DaycounterService } from "./DayCounter.service";
   selector: "day-counter",
   providers: [DaycounterService],
   templateUrl: "./daycounter.component.html",
-  styleUrls: ["./daycounter.component.scss"]
+  styleUrls: ["./daycounter.component.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class DayCounterComponent implements OnInit, OnChanges {
   @Input("startTime")

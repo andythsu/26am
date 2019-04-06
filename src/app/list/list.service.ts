@@ -65,4 +65,38 @@ export class ListService {
       environment.server + environment.event + "/old"
     );
   }
+
+  removeUpcomingEvent(event) {
+    return new Promise((resolve, reject) => {
+      const id = event.id;
+      this.httpClient
+        .delete<any>(environment.server + environment.event + `/${id}`)
+        .subscribe(data => {
+          const { error } = data;
+          if (!error) {
+            this.upcomingEvents = this.upcomingEvents.filter(
+              e => e.id !== event.id
+            );
+          } else {
+            reject(error);
+          }
+        });
+    });
+  }
+
+  removeOldEvent(event) {
+    return new Promise((resolve, reject) => {
+      const id = event.id;
+      this.httpClient
+        .delete<any>(environment.server + environment.event + `/${id}`)
+        .subscribe(data => {
+          const { error } = data;
+          if (!error) {
+            this.oldEvents = this.oldEvents.filter(e => e.id !== event.id);
+          } else {
+            reject(error);
+          }
+        });
+    });
+  }
 }
