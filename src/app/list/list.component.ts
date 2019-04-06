@@ -11,21 +11,30 @@ import { DateUtil } from "../class/index";
   encapsulation: ViewEncapsulation.None
 })
 export class ListComponent implements OnInit {
-  bucketlist: any;
+  upcomingEvents: any;
+  oldEvents: any;
   constructor(private listService: ListService) {
-    this.listService
-      .getBucketList()
-      .then((data: any) => {
-        this.bucketlist = data.map(list => {
-          return {
-            ...list,
-            date: new DateUtil(list.datetime).getFullDate()
-          };
-        });
-      })
-      .catch((error: any) => {
-        console.log("error: ", error);
+    // gets upcoming events
+    this.listService.getUpcomingEvents().subscribe(items => {
+      items = items.map(item => {
+        return {
+          ...item,
+          fullDate: new DateUtil(item.dateTime).getFullDate()
+        };
       });
+      this.upcomingEvents = items;
+    });
+
+    //gets old events
+    this.listService.getOldEvents().subscribe(items => {
+      items = items.map(item => {
+        return {
+          ...item,
+          fullDate: new DateUtil(item.dateTime).getFullDate()
+        };
+      });
+      this.oldEvents = items;
+    });
   }
 
   ngOnInit() {}

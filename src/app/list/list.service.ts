@@ -1,10 +1,30 @@
 import { Injectable } from "@angular/core";
 
 import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+
+import { DateUtil } from "../class";
 
 @Injectable()
 export class ListService {
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.getUpcomingEvents().subscribe(items => {
+      items = items.map(item => {
+        return {
+          ...item,
+          fullDate: new DateUtil(item.dateTime).getFullDate()
+        };
+      });
+    });
+    this.getOldEvents().subscribe(items => {
+      items = items.map(item => {
+        return {
+          ...item,
+          fullDate: new DateUtil(item.dateTime).getFullDate()
+        };
+      });
+    });
+  }
 
   getDummyData() {
     return [
@@ -16,16 +36,23 @@ export class ListService {
     ];
   }
 
-  getBucketList() {
-    const url = "";
-    const self = this;
-    return new Promise((resolve, reject) => {
-      // this.http.get(url).subscribe((data: any) => {
-      //     resolve(data);
-      // },(error: any) => {
-      //     reject(error);
-      // });
-      resolve(self.getDummyData());
-    });
+  addToList(name, date, time) {
+    this.httpClient
+      .post<any>(environment.server + environment.event, { name, date, time })
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
+
+  getUpcomingEvents() {
+    return this.httpClient.get<any>(
+      environment.server + environment.event + "/upcoming"
+    );
+  }
+
+  getOldEvents() {
+    return this.httpClient.get<any>(
+      environment.server + environment.event + "/old"
+    );
   }
 }

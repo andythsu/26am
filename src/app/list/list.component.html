@@ -1,11 +1,25 @@
 <mat-list>
   <h3 mat-subheader>Bucket List</h3>
-  <div *ngFor="let item of bucketlist">
-    <mat-list-item *ngIf="!item.done">
-      <h4 mat-line>{{ item.name }}</h4>
-      <p mat-line>{{ item.date }}</p>
+  <div *ngFor="let upcomingEvent of upcomingEvents">
+    <mat-list-item>
+      <h4 mat-line>{{ upcomingEvent.name }}</h4>
+      <p mat-line>{{ upcomingEvent.fullDate }}</p>
       <day-counter
-        startTime="{{ item.datetime }}"
+        startTime="{{ upcomingEvent.dateTime }}"
+        class="bucketListDayCounter"
+        showDays="true"
+        showHours="true"
+        showDayPassed="true"
+      >
+      </day-counter>
+    </mat-list-item>
+  </div>
+  <div *ngFor="let oldEvent of oldEvents">
+    <mat-list-item>
+      <h4 mat-line>{{ oldEvent.name }}</h4>
+      <p mat-line>{{ oldEvent.fullDate }}</p>
+      <day-counter
+        startTime="{{ oldEvent.dateTime }}"
         class="bucketListDayCounter"
         showDays="true"
         showHours="true"

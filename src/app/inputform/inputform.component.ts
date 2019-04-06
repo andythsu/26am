@@ -1,44 +1,51 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ViewChild,
+  Output,
+  EventEmitter
+} from "@angular/core";
 
-import './datepicker/datepicker.component.js';
-import './timepicker/timepicker.component.js';
+import "./datepicker/datepicker.component.js";
+import "./timepicker/timepicker.component.js";
+import { ListService } from "../list/list.service.js";
 
 @Component({
-  selector: 'inputform',
-  templateUrl: './inputform.component.html',
-  styleUrls: ['./inputform.component.scss'],
+  selector: "inputform",
+  providers: [ListService],
+  templateUrl: "./inputform.component.html",
+  styleUrls: ["./inputform.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class InputformComponent implements OnInit {
+  @ViewChild("inputBox") inputBox;
+  @ViewChild("timepicker") timePicker;
+  @ViewChild("datepicker") datePicker;
 
-  @ViewChild('inputBox') inputBox;
-  @ViewChild('timepicker') timePicker;
-  @ViewChild('datepicker') datePicker;
+  constructor(private listService: ListService) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onEnter() {
+    const name = this.inputBox.nativeElement.value;
+    const date = this.datePicker.nativeElement.value;
+    const time = this.timePicker.nativeElement.value;
+    this.setInputBoxValue("");
+    this.setDatePickerValue("");
+    this.setTimePickerValue("");
+    this.listService.addToList(name, date, time);
   }
 
-  onEnter(){
-    console.log(this.inputBox.nativeElement.value, " is entered");
-    console.log(this.datePicker.nativeElement.value, " is entered");
-    console.log(this.timePicker.nativeElement.value, " is entered");
-    this.setInputBoxValue('');
-    this.setDatePickerValue('');
-    this.setTimePickerValue('');
-  }
-  
-  setInputBoxValue(val){
+  setInputBoxValue(val) {
     this.inputBox.nativeElement.value = val;
   }
 
-  setDatePickerValue(val){
+  setDatePickerValue(val) {
     this.datePicker.nativeElement.value = val;
   }
 
-  setTimePickerValue(val){
+  setTimePickerValue(val) {
     this.timePicker.nativeElement.value = val;
   }
-  
 }
