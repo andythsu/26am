@@ -31,12 +31,17 @@ export class InputformComponent implements OnInit {
   onEnter() {
     const name = this.inputBox.nativeElement.value;
     const date = this.datePicker.nativeElement.value;
-    const time = this.timePicker.nativeElement.value;
+    let time = this.timePicker.nativeElement.value;
     if (!name || !date) {
       this.alertEmitter.emit({
         message: "name or date cannot be undefined",
         type: "danger"
       });
+      return;
+    }
+
+    if (!time) {
+      time = "12:00";
     }
 
     this.listService

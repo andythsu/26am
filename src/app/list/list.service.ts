@@ -10,6 +10,7 @@ import { DateUtil } from "../class";
 })
 export class ListService {
   upcomingEvents: any;
+  oldEvents: any;
   constructor(private httpClient: HttpClient) {
     this.getUpcomingEvents().subscribe(items => {
       items = items.map(item => {
@@ -27,6 +28,7 @@ export class ListService {
           fullDate: new DateUtil(item.dateTime).getFullDate()
         };
       });
+      this.oldEvents = items;
     });
   }
 
